@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:9
 MAINTAINER syju
 LABEL tomcat=v9.0.65
 RUN yum -y install wget && \
