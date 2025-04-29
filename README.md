@@ -1,27 +1,55 @@
-# docker-war-demo
+# java-tomcat-maven-example
 
-This project will demonstrate how to deploy the WAR file in a 
-docker container.
+This is an example ready-to-deploy java web application built for Tomcat using Maven and webapp-runner.
 
-### Prerequisites
-* Docker
+## Running Locally
 
-Take reference to my **Dockerfile** and similarly prepare yours the
-**Dockerfile** is available in the `/docker-war-demo` directory.
+(need maven and java installed)
 
-I have already prepared an image for this demo project, so to 
-run that image execute the following command in the terminal:
+```
+mvn package
+java -jar target/dependency/webapp-runner.jar target/*.war
+```
 
-    docker run -p 8080:8080 uday07/docker-war-demo
+The application will be available on `http://localhost:8080`.
 
-Once you execute the above command the WAR file will be run 
-inside the Tomcat, and the Tomcat is running in the Docker 
-container, Now you can interact with the WAR file by using the 
-following test APIs:
+## How This Was Built
 
-* http://localhost:8080/docker-war-demo/
-* http://localhost:8080/docker-war-demo/test
+1. Generate the project using a Maven archetype:
 
-<p align="center">
-  <b>Thank You :)</b>
-</p>
+   ```
+   mvn archetype:generate -DarchetypeArtifactId=maven-archetype-webapp
+   ```
+
+2. Add the webapp-runner plugin into the `pom.xml`:
+
+   ```
+   <build>
+     <!-- ... -->
+     <plugins>
+       <!-- ... -->
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-dependency-plugin</artifactId>
+         <version>2.3</version>
+         <executions>
+           <execution>
+             <phase>package</phase>
+             <goals><goal>copy</goal></goals>
+             <configuration>
+               <artifactItems>
+                 <artifactItem>
+                   <groupId>com.github.jsimone</groupId>
+                   <artifactId>webapp-runner</artifactId>
+                   <version>8.5.11.3</version>
+                   <destFileName>webapp-runner.jar</destFileName>
+                 </artifactItem>
+               </artifactItems>
+             </configuration>
+           </execution>
+         </executions>
+       </plugin>
+     </plugins>
+   </build>
+   ```
+# java-tomcat-sample-docker

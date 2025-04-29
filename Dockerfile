@@ -15,6 +15,6 @@ RUN rm -rf /opt/tomcat/conf/tomcat-users.xml
 ADD tomcat-users.xml /opt/tomcat/conf/tomcat-users.xml
 ADD manager/context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
 ADD host-manager/context.xml /opt/tomcat/webapps/host-manger/META-INF/context.xml
-ADD  target/docker-war-demo-0.0.1-SNAPSHOT.war  /opt/tomcat/webapps/docker-war-demo-0.0.1-SNAPSHOT.war
+ADD **/*.war /usr/local/tomcat/webapps/
 EXPOSE 8080
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
