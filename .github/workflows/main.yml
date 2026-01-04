@@ -18,6 +18,4 @@ jobs:
       run: |
         curl -v -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} \
         -T /home/runner/.m2/repository/com/example/java-tomcat-sample/1.0.1/java-tomcat-sample-1.0.1.war \
-        "http://TOMCAT_HOST:8080/manager/text/deploy?path=/Maven_war&update=true"
-
-
+        "http://${{ secrets.TOMCAT_HOST }}/manager/text/deploy?path=/Maven_war&update=true"
