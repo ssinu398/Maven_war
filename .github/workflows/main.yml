@@ -17,5 +17,5 @@ jobs:
     - name: Deploy to Tomcat 
       run: |
         curl -v -u ${{ secrets.TOMCAT.USER }}:${{ secrets.TOMCAT_PASSWORD }} \
-        -T webapp/target/webapp.war \
+        -T Maven_war/target/java-tomcat-maven-example.war \
         "http://${{ secrets.TOMCAT_HOST }}"/manager/text/deploy?path=/webapp&update=true 
