@@ -16,6 +16,6 @@ jobs:
       run: mvn clean install -f pom.xml 
     - name: Deploy to Tomcat 
       run: |
-        curl -v -u ${{ secrets.TOMCAT.USER }}:${{ secrets.TOMCAT_PASSWORD }} \
+        curl -v -u USERNAME:PASSWORD \
         -T Maven_war/target/java-tomcat-maven-example.war \
-        "http://${{ secrets.TOMCAT_HOST }}"/manager/text/deploy?path=/webapp&update=true 
+        "http://TOMCAT_HOST:8080/manager/text/deploy?path=/webapp&update=true"
